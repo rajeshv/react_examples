@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
@@ -33,8 +33,6 @@ export class Todo extends Component {
 
   handleClick(e) {
     e.preventDefault();
-    console.log('in the handleClick');
-
     var newItem = {
       item: this.state.item,
       id: Date.now()
@@ -65,17 +63,6 @@ export class Todo extends Component {
   }
 }
 
-// export class TodoList extends React.Component{
-//   render(){
-//     return(
-//       <ul>
-//         {this.props.items.map(item=> 
-//           (<li>item</li>)
-//         )}
-//       </ul>
-//     );
-//   }
-// }
 
 class TodoList extends React.Component {
   render() {
@@ -88,6 +75,3 @@ class TodoList extends React.Component {
     );
   }
 }
-
-
-export default App;
