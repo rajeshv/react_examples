@@ -1,21 +1,32 @@
 import React, { Component } from 'react';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, hashHistory, Link } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
 
-export class App extends Component {
+export class NavigationApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state={items: this.props.route.items};
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <ul>
+        {this.state.items.map((item, index) =>
+          <li key={index}><NavItem name={item}/></li>
+         )}
+        </ul>
       </div>
     );
+  }
+}
+
+class NavItem extends Component {
+  render() {
+    return (
+      <Link to={"/" + this.props.name}>{this.props.name}</Link>
+      );
   }
 }
 
@@ -41,7 +52,7 @@ class About extends Component {
 
 export default (
   <Router history={hashHistory}>
-    <Route path="/" component={Home}/>
+    <Route path="/" component={NavigationApp} items={['home', 'contact', 'about']} />
     <Route path="/contact" component={Contact}/>
     <Route path="/about" component={About}/>
   </Router>
