@@ -6,7 +6,7 @@ import './App.css';
 export class NavigationApp extends Component {
   constructor(props) {
     super(props);
-    this.state={items: this.props.route.items};
+    this.state={items: this.props.items};
   }
 
   render() {
@@ -50,10 +50,25 @@ class About extends Component {
   }
 }
 
+class MainLayout extends Component {
+  render() {
+    return (
+      <div className="app">
+        <NavigationApp items={['home', 'contact', 'about']}/>
+        <main>
+          {this.props.children}
+        </main>
+      </div>
+    );
+  }
+}
+
 export default (
   <Router history={hashHistory}>
-    <Route path="/" component={NavigationApp} items={['home', 'contact', 'about']} />
-    <Route path="/contact" component={Contact}/>
-    <Route path="/about" component={About}/>
+    <Route component={MainLayout}>
+      <Route path="/" component={Home} />
+      <Route path="/contact" component={Contact}/>
+      <Route path="/about" component={About}/>
+    </Route>
   </Router>
 );
