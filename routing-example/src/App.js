@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import { Router, Route, hashHistory, Link } from 'react-router';
-import logo from './logo.svg';
-import './App.css';
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import { Navbar, NavItem, Nav } from 'react-bootstrap';
 
 export class NavigationApp extends Component {
   constructor(props) {
     super(props);
     this.state={items: this.props.items};
   }
-
   render() {
     return (
-      <div className="App">
-        <ul>
+      <Navbar>
+        <Nav>
         {this.state.items.map((item, index) =>
-          <li key={index}><NavItem name={item}/></li>
+          <NavItem key={index}><Navlink name={item}/></NavItem>
          )}
-        </ul>
-      </div>
+        </Nav>
+      </Navbar>
     );
   }
 }
 
-class NavItem extends Component {
+class Navlink extends Component {
   render() {
     return (
       <Link to={"/" + this.props.name}>{this.props.name}</Link>
@@ -65,8 +64,10 @@ class MainLayout extends Component {
 
 export default (
   <Router history={hashHistory}>
+    <IndexRoute component={Home} />
     <Route component={MainLayout}>
       <Route path="/" component={Home} />
+      <Route path="/home" component={Home} />
       <Route path="/contact" component={Contact}/>
       <Route path="/about" component={About}/>
     </Route>
